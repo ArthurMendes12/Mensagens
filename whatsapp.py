@@ -1,12 +1,9 @@
 # ==========================================
-# WHATSAPP - ABRIR CONVERSA
+# WHATSAPP - GERADOR DE LINK
 # ==========================================
 
-from os import link
 import urllib.parse
-import webbrowser
 from datetime import datetime
-
 
 
 class WhatsAppService:
@@ -26,7 +23,7 @@ class WhatsAppService:
         telefone = str(telefone)
 
 
-        caracteres = [
+        remover = [
             " ",
             "-",
             "(",
@@ -35,7 +32,7 @@ class WhatsAppService:
         ]
 
 
-        for caractere in caracteres:
+        for caractere in remover:
 
             telefone = telefone.replace(
                 caractere,
@@ -58,49 +55,49 @@ class WhatsAppService:
         )
 
 
-        mensagem = urllib.parse.quote(
+        mensagem_codificada = urllib.parse.quote(
             mensagem
         )
 
 
         link = (
             f"https://wa.me/{telefone}"
-            f"?text={mensagem}"
+            f"?text={mensagem_codificada}"
         )
 
 
         return link
 
 
-def abrir_whatsapp(
-    self,
-    telefone,
-    mensagem
-):
 
-    link = self.criar_link(
+    def abrir_whatsapp(
+        self,
         telefone,
         mensagem
-    )
+    ):
 
 
-    registro = {
-
-        "telefone": telefone,
-
-        "mensagem": mensagem,
-
-        "status": "link criado"
-
-    }
+        link = self.criar_link(
+            telefone,
+            mensagem
+        )
 
 
-    self.historico.append(
-        registro
-    )
+        self.historico.append({
+
+            "telefone": telefone,
+
+            "mensagem": mensagem,
+
+            "data": datetime.now(),
+
+            "status": "link criado"
+
+        })
 
 
-    return link
+        return link
+
 
 
     def obter_historico(self):
