@@ -177,7 +177,45 @@ if (
 
     for indice, contato in st.session_state.df.iterrows():
 
-    texto = mensagem
+
+        texto = mensagem
+
+
+
+        for coluna in contato.index:
+
+            texto = texto.replace(
+                "{" + coluna + "}",
+                str(contato[coluna])
+            )
+
+
+
+        nome = contato["nome"]
+
+        telefone = contato["telefone"]
+
+
+
+        col1, col2 = st.columns(
+            [3,1]
+        )
+
+
+        with col1:
+
+            st.write(
+                f"📱 {nome} - {telefone}"
+            )
+
+
+
+        with col2:
+
+
+            for indice, contato in st.session_state.df.iterrows():
+
+                texto = mensagem
 
     for coluna in contato.index:
 
@@ -239,6 +277,7 @@ if (
             st.success(
                 f"Link criado para {nome}"
             )
+
 
 
 

@@ -2,6 +2,7 @@
 # WHATSAPP - ABRIR CONVERSA
 # ==========================================
 
+from os import link
 import urllib.parse
 import webbrowser
 from datetime import datetime
@@ -71,8 +72,7 @@ class WhatsAppService:
         return link
 
 
-
-    def abrir_whatsapp(
+def abrir_whatsapp(
     self,
     telefone,
     mensagem
@@ -101,8 +101,6 @@ class WhatsAppService:
 
 
     return link
-
-
 
 
     def obter_historico(self):
