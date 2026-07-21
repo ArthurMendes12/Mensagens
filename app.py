@@ -219,10 +219,22 @@ if (
             ):
 
 
-                st.session_state.whatsapp.abrir_whatsapp(
-                    telefone,
-                    texto
-                )
+                link = (
+    st.session_state.whatsapp.abrir_whatsapp(
+        telefone,
+        texto
+    )
+)
+
+
+st.markdown(
+    f"""
+    <a href="{link}" target="_blank">
+        📲 Abrir WhatsApp
+    </a>
+    """,
+    unsafe_allow_html=True
+)
 
 
                 registrar_envio(
