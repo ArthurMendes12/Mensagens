@@ -73,42 +73,35 @@ class WhatsAppService:
 
 
     def abrir_whatsapp(
-        self,
+    self,
+    telefone,
+    mensagem
+):
+
+    link = self.criar_link(
         telefone,
         mensagem
-    ):
+    )
 
 
-        link = self.criar_link(
-            telefone,
-            mensagem
-        )
+    registro = {
+
+        "telefone": telefone,
+
+        "mensagem": mensagem,
+
+        "status": "link criado"
+
+    }
 
 
-        webbrowser.open(
-            link
-        )
+    self.historico.append(
+        registro
+    )
 
 
-        registro = {
+    return link
 
-            "telefone": telefone,
-
-            "mensagem": mensagem,
-
-            "data": datetime.now(),
-
-            "status": "aberto"
-
-        }
-
-
-        self.historico.append(
-            registro
-        )
-
-
-        return link
 
 
 
