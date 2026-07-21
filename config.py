@@ -6,7 +6,10 @@ import os
 
 # Pasta onde serão armazenadas as planilhas enviadas
 UPLOAD_FOLDER = "uploads"
+if not os.path.exists(UPLOAD_FOLDER):
 
+    os.makedirs(UPLOAD_FOLDER
+                
 # Pasta para salvar logs
 LOG_FOLDER = "logs"
 
