@@ -177,76 +177,68 @@ if (
 
     for indice, contato in st.session_state.df.iterrows():
 
+    texto = mensagem
 
-        texto = mensagem
+    for coluna in contato.index:
 
-
-
-        for coluna in contato.index:
-
-            texto = texto.replace(
-                "{" + coluna + "}",
-                str(contato[coluna])
-            )
-
-
-
-        nome = contato["nome"]
-
-        telefone = contato["telefone"]
-
-
-
-        col1, col2 = st.columns(
-            [3,1]
+        texto = texto.replace(
+            "{" + coluna + "}",
+            str(contato[coluna])
         )
 
 
-        with col1:
+    nome = contato["nome"]
 
-            st.write(
-                f"📱 {nome} - {telefone}"
+    telefone = contato["telefone"]
+
+
+    col1, col2 = st.columns(
+        [3,1]
+    )
+
+
+    with col1:
+
+        st.write(
+            f"📱 {nome} - {telefone}"
+        )
+
+
+    with col2:
+
+        if st.button(
+            "Enviar",
+            key=indice
+        ):
+
+            link = (
+                st.session_state.whatsapp.abrir_whatsapp(
+                    telefone,
+                    texto
+                )
             )
 
 
-
-        with col2:
-
-
-            if st.button(
-                "Enviar",
-                key=indice
-            ):
-
-
-                link = (
-    st.session_state.whatsapp.abrir_whatsapp(
-        telefone,
-        texto
-    )
-)
+            st.markdown(
+                f"""
+                <a href="{link}" target="_blank">
+                    📲 Abrir WhatsApp
+                </a>
+                """,
+                unsafe_allow_html=True
+            )
 
 
-st.markdown(
-    f"""
-    <a href="{link}" target="_blank">
-        📲 Abrir WhatsApp
-    </a>
-    """,
-    unsafe_allow_html=True
-)
+            registrar_envio(
+                telefone,
+                texto,
+                "link criado"
+            )
 
 
-                registrar_envio(
-                    telefone,
-                    texto,
-                    "aberto"
-                )
-
-
-                st.success(
-                    f"WhatsApp aberto para {nome}"
-                )
+            st.success(
+                f"Link criado para {nome}"
+            )
 
 
 
